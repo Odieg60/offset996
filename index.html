@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>996 4S — Fitment Sport Classic 19"</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0c0e;
+    --bg2: #141417;
+    --bg3: #1c1c21;
+    --text: #e8e6e0;
+    --text2: #9a9890;
+    --text3: #5c5b56;
+    --accent-blue: #5b9bd5;
+    --accent-blue-dim: #2a4a6a;
+    --accent-pink: #d4537e;
+    --accent-pink-dim: #6a2a40;
+    --accent-green: #5dca7a;
+    --accent-green-dim: rgba(93,202,122,0.12);
+    --accent-orange: #e89040;
+    --accent-orange-dim: rgba(232,144,64,0.12);
+    --accent-red: #e24b4a;
+    --accent-red-dim: rgba(226,75,74,0.12);
+    --mono: 'DM Mono', monospace;
+    --sans: 'Space Grotesk', sans-serif;
+    --serif: 'Instrument Serif', serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .grain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 256px;
+    z-index: 999;
+  }
+
+  header {
+    padding: 3rem 2rem 2rem;
+    max-width: 960px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--bg3);
+  }
+
+  header .tag {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-pink);
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  header h1 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+
+  header h1 span { color: var(--accent-blue); }
+
+  header p {
+    color: var(--text2);
+    font-size: 0.95rem;
+    max-width: 540px;
+    line-height: 1.6;
+  }
+
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  /* --- Spec Cards --- */
+  .specs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--bg3);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 3rem;
+  }
+
+  .spec-card {
+    background: var(--bg2);
+    padding: 1.5rem;
+    position: relative;
+  }
+
+  .spec-card .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  .spec-card.oem .dot { background: var(--accent-blue); }
+  .spec-card.sc .dot { background: var(--accent-pink); }
+
+  .spec-card h3 {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text2);
+    margin-bottom: 1rem;
+  }
+
+  .spec-card .wheel-name {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .spec-card .wheel-size {
+    font-family: var(--mono);
+    font-size: 1.1rem;
+    color: var(--text2);
+    margin-bottom: 1rem;
+  }
+
+  .spec-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.35rem 0;
+    border-top: 1px solid var(--bg3);
+    font-size: 0.85rem;
+  }
+
+  .spec-row .k { color: var(--text3); }
+  .spec-row .v { font-family: var(--mono); font-size: 0.8rem; }
+
+  /* --- Cross-section SVG area --- */
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 1rem;
+  }
+
+  .cross-section-wrap {
+    background: var(--bg2);
+    border-radius: 12px;
+    padding: 2rem 1rem;
+    margin-bottom: 3rem;
+    overflow-x: auto;
+  }
+
+  .cross-section-wrap svg text {
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* --- Delta table --- */
+  .delta-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 3rem;
+    font-size: 0.88rem;
+  }
+
+  .delta-table th {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text3);
+    text-align: left;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--bg3);
+  }
+
+  .delta-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--bg3);
+    vertical-align: middle;
+  }
+
+  .delta-table tr:last-child td { border-bottom: none; }
+
+  .pill {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  .pill.ok { background: var(--accent-green-dim); color: var(--accent-green); }
+  .pill.warn { background: var(--accent-orange-dim); color: var(--accent-orange); }
+  .pill.bad { background: var(--accent-red-dim); color: var(--accent-red); }
+
+  /* --- Verdict --- */
+  .verdict {
+    background: var(--bg2);
+    border-radius: 12px;
+    border-left: 3px solid var(--accent-red);
+    padding: 1.5rem 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .verdict h2 {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 0.75rem;
+    color: var(--accent-red);
+  }
+
+  .verdict p {
+    color: var(--text2);
+    line-height: 1.7;
+    font-size: 0.9rem;
+  }
+
+  .verdict p strong { color: var(--text); font-weight: 600; }
+
+  .verdict ul {
+    list-style: none;
+    margin-top: 1rem;
+  }
+
+  .verdict ul li {
+    padding: 0.4rem 0;
+    color: var(--text2);
+    font-size: 0.88rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .verdict ul li::before {
+    content: '→';
+    color: var(--accent-orange);
+    flex-shrink: 0;
+  }
+
+  /* --- Toggle --- */
+  .toggle-bar {
+    display: flex;
+    gap: 0;
+    margin-bottom: 1rem;
+    background: var(--bg3);
+    border-radius: 8px;
+    overflow: hidden;
+    width: fit-content;
+  }
+
+  .toggle-bar button {
+    background: none;
+    border: none;
+    color: var(--text3);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.5rem 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .toggle-bar button.active {
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  .view-panel { display: none; }
+  .view-panel.active { display: block; }
+
+  footer {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem;
+    border-top: 1px solid var(--bg3);
+    color: var(--text3);
+    font-size: 0.75rem;
+    font-family: var(--mono);
+  }
+
+  @media (max-width: 640px) {
+    .specs-grid { grid-template-columns: 1fr; }
+    header, main, footer { padding-left: 1rem; padding-right: 1rem; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-in {
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .animate-in:nth-child(2) { animation-delay: 0.08s; }
+  .animate-in:nth-child(3) { animation-delay: 0.16s; }
+  .animate-in:nth-child(4) { animation-delay: 0.24s; }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<header>
+  <span class="tag">Wheel fitment analysis</span>
+  <h1>911 Sport Classic 19" <span>→</span> 996 4S</h1>
+  <p>11,5J × 19 ET50 — la jante arrière du 997 Sport Classic passe-t-elle sur le widebody du 996 Carrera 4S ?</p>
+</header>
+
+<main>
+
+  <!-- Spec Cards -->
+  <div class="specs-grid animate-in">
+    <div class="spec-card oem">
+      <h3><span class="dot"></span>OEM 996 4S — Arrière</h3>
+      <div class="wheel-name">Turbo Twist / Carrera</div>
+      <div class="wheel-size">11J × 18 ET45</div>
+      <div class="spec-row"><span class="k">Largeur jante</span><span class="v">279,4 mm</span></div>
+      <div class="spec-row"><span class="k">Pneu</span><span class="v">295/30 ZR18</span></div>
+      <div class="spec-row"><span class="k">Lèvre ext. → moyeu</span><span class="v">45 mm</span></div>
+      <div class="spec-row"><span class="k">Lèvre int. → moyeu</span><span class="v">234 mm</span></div>
+      <div class="spec-row"><span class="k">PCD</span><span class="v">5 × 130</span></div>
+      <div class="spec-row"><span class="k">Alésage</span><span class="v">71,6 mm</span></div>
+    </div>
+    <div class="spec-card sc">
+      <h3><span class="dot"></span>Sport Classic — Arrière</h3>
+      <div class="wheel-name">911 Sport Classic</div>
+      <div class="wheel-size">11,5J × 19 ET50</div>
+      <div class="spec-row"><span class="k">Largeur jante</span><span class="v">292,1 mm</span></div>
+      <div class="spec-row"><span class="k">Pneu typique</span><span class="v">305/30 ZR19</span></div>
+      <div class="spec-row"><span class="k">Lèvre ext. → moyeu</span><span class="v">50 mm</span></div>
+      <div class="spec-row"><span class="k">Lèvre int. → moyeu</span><span class="v">242 mm</span></div>
+      <div class="spec-row"><span class="k">PCD</span><span class="v">5 × 130</span></div>
+      <div class="spec-row"><span class="k">Alésage</span><span class="v">71,6 mm</span></div>
+    </div>
+  </div>
+
+  <!-- Cross-section -->
+  <div class="section-label animate-in">Vue en coupe — axe arrière</div>
+
+  <div class="toggle-bar">
+    <button class="active" onclick="switchView('separate')">Séparé</button>
+    <button onclick="switchView('overlay')">Superposé</button>
+  </div>
+
+  <div class="cross-section-wrap animate-in">
+
+    <!-- Separate View -->
+    <div id="view-separate" class="view-panel active">
+      <svg width="100%" viewBox="0 0 700 340">
+        <!-- Legend -->
+        <text x="40" y="22" fill="#5c5b56" font-size="10" letter-spacing="0.08em" text-transform="uppercase">INTÉRIEUR (suspension)</text>
+        <text x="660" y="22" fill="#5c5b56" font-size="10" text-anchor="end" letter-spacing="0.08em">EXTÉRIEUR (aile)</text>
+
+        <!-- Hub line -->
+        <line x1="380" y1="30" x2="380" y2="330" stroke="#5c5b56" stroke-width="1" stroke-dasharray="6 4"/>
+        <text x="384" y="42" fill="#9a9890" font-size="9">Moyeu</text>
+
+        <!-- OEM -->
+        <g>
+          <text x="40" y="75" fill="#5b9bd5" font-size="11" font-weight="500">OEM 11J × 18 ET45</text>
+          <text x="40" y="90" fill="#5c5b56" font-size="9">279mm de large</text>
+
+          <!-- Wheel rect: inner=380-234=146, outer=380+45=425, w=279 -->
+          <rect x="146" y="100" width="279" height="52" rx="4" fill="rgba(91,155,213,0.1)" stroke="#5b9bd5" stroke-width="1.2"/>
+
+          <!-- Center line -->
+          <line x1="286" y1="95" x2="286" y2="162" stroke="#5c5b56" stroke-width="0.5" stroke-dasharray="3 3"/>
+          <text x="286" y="172" fill="#5c5b56" font-size="8" text-anchor="middle">centre</text>
+
+          <!-- ET arrow -->
+          <line x1="286" y1="115" x2="380" y2="115" stroke="#5b9bd5" stroke-width="0.8"/>
+          <circle cx="286" cy="115" r="2" fill="#5b9bd5"/>
+          <circle cx="380" cy="115" r="2" fill="#5b9bd5"/>
+          <text x="333" y="110" fill="#5b9bd5" font-size="10" text-anchor="middle" font-weight="500">ET 45</text>
+
+          <!-- Inner edge -->
+          <line x1="146" y1="155" x2="146" y2="165" stroke="#5c5b56" stroke-width="0.5"/>
+          <text x="146" y="175" fill="#5c5b56" font-size="8" text-anchor="middle">234mm</text>
+
+          <!-- Outer edge -->
+          <line x1="425" y1="155" x2="425" y2="165" stroke="#5c5b56" stroke-width="0.5"/>
+          <text x="425" y="175" fill="#5c5b56" font-size="8" text-anchor="middle">45mm</text>
+        </g>
+
+        <!-- Sport Classic -->
+        <g>
+          <text x="40" y="215" fill="#d4537e" font-size="11" font-weight="500">SC 11,5J × 19 ET50</text>
+          <text x="40" y="230" fill="#5c5b56" font-size="9">292mm de large</text>
+
+          <!-- inner=380-242=138, outer=380+50=430, w=292 -->
+          <rect x="138" y="240" width="292" height="52" rx="4" fill="rgba(212,83,126,0.1)" stroke="#d4537e" stroke-width="1.2"/>
+
+          <!-- Center line -->
+          <line x1="284" y1="235" x2="284" y2="302" stroke="#5c5b56" stroke-width="0.5" stroke-dasharray="3 3"/>
+          <text x="284" y="312" fill="#5c5b56" font-size="8" text-anchor="middle">centre</text>
+
+          <!-- ET arrow -->
+          <line x1="284" y1="255" x2="380" y2="255" stroke="#d4537e" stroke-width="0.8"/>
+          <circle cx="284" cy="255" r="2" fill="#d4537e"/>
+          <circle cx="380" cy="255" r="2" fill="#d4537e"/>
+          <text x="332" y="250" fill="#d4537e" font-size="10" text-anchor="middle" font-weight="500">ET 50</text>
+
+          <!-- Inner edge -->
+          <line x1="138" y1="295" x2="138" y2="305" stroke="#5c5b56" stroke-width="0.5"/>
+          <text x="138" y="315" fill="#5c5b56" font-size="8" text-anchor="middle">242mm</text>
+
+          <!-- Outer edge -->
+          <line x1="430" y1="295" x2="430" y2="305" stroke="#5c5b56" stroke-width="0.5"/>
+          <text x="430" y="315" fill="#5c5b56" font-size="8" text-anchor="middle">50mm</text>
+        </g>
+      </svg>
+    </div>
+
+    <!-- Overlay View -->
+    <div id="view-overlay" class="view-panel">
+      <svg width="100%" viewBox="0 0 700 260">
+        <text x="40" y="22" fill="#5c5b56" font-size="10" letter-spacing="0.08em">INTÉRIEUR (suspension)</text>
+        <text x="660" y="22" fill="#5c5b56" font-size="10" text-anchor="end" letter-spacing="0.08em">EXTÉRIEUR (aile)</text>
+
+        <!-- Hub line -->
+        <line x1="380" y1="30" x2="380" y2="240" stroke="#5c5b56" stroke-width="1" stroke-dasharray="6 4"/>
+        <text x="384" y="42" fill="#9a9890" font-size="9">Moyeu</text>
+
+        <!-- OEM (dashed) -->
+        <rect x="146" y="60" width="279" height="60" rx="4" fill="rgba(91,155,213,0.08)" stroke="#5b9bd5" stroke-width="1" stroke-dasharray="5 3"/>
+        <text x="286" y="55" fill="#5b9bd5" font-size="9" text-anchor="middle">OEM 11J ET45</text>
+
+        <!-- SC (solid) -->
+        <rect x="138" y="60" width="292" height="60" rx="4" fill="rgba(212,83,126,0.12)" stroke="#d4537e" stroke-width="1.2"/>
+        <text x="284" y="135" fill="#d4537e" font-size="9" text-anchor="middle">SC 11,5J ET50</text>
+
+        <!-- Delta indicators -->
+        <!-- Inner delta: 146-138 = 8mm -->
+        <line x1="138" y1="145" x2="146" y2="145" stroke="#e89040" stroke-width="2"/>
+        <line x1="138" y1="140" x2="138" y2="150" stroke="#e89040" stroke-width="0.8"/>
+        <line x1="146" y1="140" x2="146" y2="150" stroke="#e89040" stroke-width="0.8"/>
+        <text x="142" y="162" fill="#e89040" font-size="10" text-anchor="middle" font-weight="500">+8mm</text>
+        <text x="142" y="174" fill="#5c5b56" font-size="8" text-anchor="middle">vers suspension</text>
+
+        <!-- Outer delta: 430-425 = 5mm -->
+        <line x1="425" y1="145" x2="430" y2="145" stroke="#e89040" stroke-width="2"/>
+        <line x1="425" y1="140" x2="425" y2="150" stroke="#e89040" stroke-width="0.8"/>
+        <line x1="430" y1="140" x2="430" y2="150" stroke="#e89040" stroke-width="0.8"/>
+        <text x="428" y="162" fill="#e89040" font-size="10" text-anchor="middle" font-weight="500">+5mm</text>
+        <text x="428" y="174" fill="#5c5b56" font-size="8" text-anchor="middle">vers aile</text>
+
+        <!-- Total -->
+        <rect x="230" y="198" width="240" height="30" rx="6" fill="rgba(232,144,64,0.1)" stroke="#e89040" stroke-width="0.5"/>
+        <text x="350" y="217" fill="#e89040" font-size="10" text-anchor="middle" font-weight="500">Total: +13mm de large (279 → 292)</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Delta Table -->
+  <div class="section-label animate-in">Différences mesurées</div>
+  <table class="delta-table animate-in">
+    <thead>
+      <tr>
+        <th>Paramètre</th>
+        <th>OEM 996 4S</th>
+        <th>Sport Classic</th>
+        <th>Delta</th>
+        <th>Verdict</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>PCD</td>
+        <td style="font-family:var(--mono);font-size:0.82rem">5 × 130</td>
+        <td style="font-family:var(--mono);font-size:0.82rem">5 × 130</td>
+        <td style="font-family:var(--mono);font-size:0.82rem">—</td>
+        <td><span class="pill ok">OK</span></td>
+      </tr>
+      <tr>
+        <td>Alésage</td>
+        <td style="font-family:var(--mono);font-size:0.82rem">71,6 mm</td>
+        <td style="font-family:var(--mono);font-size:0.82rem">71,6 mm</td>
+        <td style="font-family:var(--mono);font-size:0.82rem">—</td>
+        <td><span class="pill ok">OK</span></td>
+      </tr>
+      <tr>
+        <td>Diamètre</td>
+        <td style="font-family:var(--mono);font-size:0.82rem">18"</td>
+        <td style="font-family:var(--mono);font-size:0.82rem">19"</td>
+        <td style="font-family:var(--mono);font-size:0.82rem">+1"</td>
+        <td><span class="pill ok">OK</span></td>
+      </tr>
+      <tr>
+        <td>Largeur</td>
+        <td style="font-family:var(--mono);font-size:0.82rem">11J (279mm)</td>
+        <td style="font-family:var(--mono);font-size:0.82rem">11,5J (292mm)</td>
+        <td style="font-family:var(--mono);font-size:0.82rem;color:var(--accent-orange)">+13mm</td>
+        <td><span class="pill warn">Serré</span></td>
+      </tr>
+      <tr>
+        <td>ET (offset)</td>
+        <td style="font-family:var(--mono);font-size:0.82rem">45</td>
+        <td style="font-family:var(--mono);font-size:0.82rem">50</td>
+        <td style="font-family:var(--mono);font-size:0.82rem;color:var(--accent-orange)">+5</td>
+        <td><span class="pill warn">Attention</span></td>
+      </tr>
+      <tr>
+        <td>Déport ext. (aile)</td>
+        <td style="font-family:var(--mono);font-size:0.82rem">45 mm</td>
+        <td style="font-family:var(--mono);font-size:0.82rem">50 mm</td>
+        <td style="font-family:var(--mono);font-size:0.82rem;color:var(--accent-red)">+5mm</td>
+        <td><span class="pill bad">Frotte</span></td>
+      </tr>
+      <tr>
+        <td>Déport int. (susp.)</td>
+        <td style="font-family:var(--mono);font-size:0.82rem">234 mm</td>
+        <td style="font-family:var(--mono);font-size:0.82rem">242 mm</td>
+        <td style="font-family:var(--mono);font-size:0.82rem;color:var(--accent-red)">+8mm</td>
+        <td><span class="pill bad">Conflit</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Verdict -->
+  <div class="verdict animate-in">
+    <h2>Ne passe pas en l'état</h2>
+    <p>
+      La jante 911 Sport Classic en <strong>11,5J × 19 ET50</strong> est conçue pour le <strong>997 widebody</strong>
+      (C4S / Turbo / Sport Classic) dont le passage de roue arrière est plus large que celui du 996 4S.
+    </p>
+    <p style="margin-top:0.75rem">
+      Même si le PCD, l'alésage et le diamètre sont compatibles, la combinaison largeur + offset
+      crée un double débordement :
+    </p>
+    <ul>
+      <li><strong>+5mm côté aile</strong> — frottement quasi certain en compression, surtout avec un pneu 305/30R19</li>
+      <li><strong>+8mm côté suspension</strong> — conflit possible avec les bras arrière de la 996</li>
+      <li>Si correction par spacer (pour recentrer) → aggrave le débordement côté aile</li>
+    </ul>
+    <p style="margin-top:1rem; color: var(--text3); font-size: 0.82rem;">
+      Pour forcer le montage : roulage d'ailes arrière obligatoire, vérification garde intérieure en butée, et probablement écarteurs de voie spécifiques. Pas un bolt-on propre.
+    </p>
+  </div>
+
+</main>
+
+<footer>
+  Porsche 996 4S (2001) — Wheel Fitment Tool — Données: Porsche Tequipment / PCA / TEILE.COM
+</footer>
+
+<script>
+function switchView(view) {
+  document.querySelectorAll('.view-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.toggle-bar button').forEach(b => b.classList.remove('active'));
+  document.getElementById('view-' + (view === 'overlay' ? 'overlay' : 'separate')).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
